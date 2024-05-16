@@ -1,0 +1,28 @@
+﻿@model WebApplication1.Models.Bill
+
+<h1>Bill Detail</h1>
+<div>
+    <p>ID: @Model.Id</p>
+    <p>Create Date: @Model.CreateDate</p>
+    <p>Money: @Model.Money</p>
+    <h3>Details</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var detail in Model.Details)
+            {
+                <tr>
+                    <td>@detail.ProductId</td>
+                    <td>@detail.Quantity</td>
+                    <td>@detail.ProductPrice</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

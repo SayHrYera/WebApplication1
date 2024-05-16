@@ -1,0 +1,39 @@
+﻿@model IEnumerable<WebApplication1.Models.Bill>
+
+<h1>List of Bills</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Create Date</th>
+            <th>Money</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bill in Model)
+        {
+            <tr>
+                <td>@bill.Id</td>
+                <td>@bill.CreateDate</td>
+                <td>@bill.Money</td>
+                <td>@bill.Status</td>
+                <td>
+                    <a asp-action="Detail" asp-controller="Bill" asp-route-id="@bill.Id">Detail</a>
+                    <a href="@Url.Action("BuyAgain", "Bill", new { id = bill.Id })">Buy Again</a>
+                    @if (bill.Status == 100)
+                    {
+                        <span class="text-muted">Cancelled</span>
+                    }
+                    else
+                    {
+                        <form method="post" asp-action="CancelBill" asp-route-id="@bill.Id">
+                            <button type="submit" class="btn btn-danger">Cancel</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
